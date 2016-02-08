@@ -1,0 +1,41 @@
+{
+  "name": "aikidesk/www-php-sdk",
+  "type": "library",
+  "description": "PHP library for Aikidesk WWW API",
+  "keywords": [
+    "aikidesk",
+    "api"
+  ],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Dimitar Rekinov",
+      "email": "d.rekinov@aikidesk.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.5.0"
+  },
+  "require-dev": {
+    "symfony/var-dumper": "~2.8",
+    "guzzlehttp/guzzle": "~6"
+  },
+  "suggest": {
+    "guzzlehttp/guzzle": "Guzzle HTTP Client v6 (with/out curl)"
+  },
+  "autoload": {
+    "psr-4": {
+      "Aikidesk\\WWW\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
+    }
+  },
+  "config": {
+    "preferred-install": "dist",
+    "optimize-autoloader": true
+  },
+  "minimum-stability": "stable"
+}
