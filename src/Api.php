@@ -25,16 +25,32 @@ class Api
     private $oauthResources;
 
     /**
+     * @var \Aikidesk\WWW\Resources\Users
+     */
+    private $usersResources;
+
+    /**
+     * @var \Aikidesk\WWW\Resources\Instances
+     */
+    private $instancesResources;
+
+    /**
      * Api constructor.
      * @param \Aikidesk\WWW\Contracts\RequestInterface $request
      * @param null $oauthResources
+     * @param null $usersResources
+     * @param null $instancesResources
      */
     public function __construct(
         RequestInterface $request,
-        $oauthResources = null
+        $oauthResources = null,
+        $usersResources = null,
+        $instancesResources = null
     ) {
         $this->request = $request;
         $this->oauthResources = $oauthResources ?: new \Aikidesk\WWW\Resources\OAuth($this->request);
+        $this->usersResources = $usersResources ?: new \Aikidesk\WWW\Resources\Users(null, $this->request);
+        $this->instancesResources = $instancesResources ?: new \Aikidesk\WWW\Resources\Instances(null, $this->request);
 //        $this->sessionResources = $sessionResources ?: new \Aikidesk\WWW\Resources\Sessions(null, $this->request);
 //        $this->roomResources = $roomResources ?: new \Aikidesk\WWW\Resources\Rooms(null, $this->request);
 //        $this->userResources = $userResources ?: new \Aikidesk\WWW\Resources\Users(null, $this->request);
@@ -50,6 +66,7 @@ class Api
      * @throws \Aikidesk\WWW\Exceptions\ForbiddenException
      * @throws \Aikidesk\WWW\Exceptions\InternalServerErrorException
      * @throws \Aikidesk\WWW\Exceptions\NotFoundException
+     * @throws \Aikidesk\WWW\Exceptions\ServerValidationException
      * @throws \Aikidesk\WWW\Exceptions\ServerUnavailableException
      * @throws \Aikidesk\WWW\Exceptions\UnauthorizedException
      */
@@ -67,6 +84,9 @@ class Api
                 break;
             case 404:
                 throw new \Aikidesk\WWW\Exceptions\NotFoundException($msg, $code, $url, $meta);
+                break;
+            case 422:
+                throw new \Aikidesk\WWW\Exceptions\ServerValidationException($msg, $code, $url, $meta);
                 break;
             case 500:
                 throw new \Aikidesk\WWW\Exceptions\InternalServerErrorException($msg, $code, $url, $meta);
@@ -87,26 +107,27 @@ class Api
         return $this->oauthResources;
     }
 
-    /*public function session($session_id = null)
+    /**
+     * @param int|null $userId
+     * @return \Aikidesk\WWW\Resources\Users
+     */
+    public function users($userId = null)
     {
-        $this->sessionResources->setId($session_id);
+        $this->usersResources->setId($userId);
 
-        return $this->sessionResources;
+        return $this->usersResources;
     }
 
-    public function room($room_id = null)
+    /**
+     * @param int|null $instanceId
+     * @return \Aikidesk\WWW\Resources\Instances
+     */
+    public function instances($instanceId = null)
     {
-        $this->roomResources->setId($room_id);
+        $this->instancesResources->setId($instanceId);
 
-        return $this->roomResources;
+        return $this->instancesResources;
     }
-
-    public function user($user_id = null)
-    {
-        $this->userResources->setId($user_id);
-
-        return $this->userResources;
-    }*/
 
     /**
      * @param string $access_token

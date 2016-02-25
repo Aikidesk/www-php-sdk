@@ -2,7 +2,6 @@
 namespace Aikidesk\WWW;
 
 use Aikidesk\WWW\Contracts\RequestInterface;
-use Symfony\Component\VarDumper\VarDumper;
 
 class ApiTokens
 {
@@ -40,6 +39,7 @@ class ApiTokens
      * @throws \Aikidesk\WWW\Exceptions\ForbiddenException
      * @throws \Aikidesk\WWW\Exceptions\InternalServerErrorException
      * @throws \Aikidesk\WWW\Exceptions\NotFoundException
+     * @throws \Aikidesk\WWW\Exceptions\ServerValidationException
      * @throws \Aikidesk\WWW\Exceptions\ServerUnavailableException
      * @throws \Aikidesk\WWW\Exceptions\UnauthorizedException
      */
@@ -92,6 +92,7 @@ class ApiTokens
             'state' => 'PhEbakeb4azeqAtUPrewabuxUwruqahA',
             'scope' => implode(',', $scopes),
         ];
+
         return $this->request->post('oauth/client_credentials', $postFormData);
     }
 
