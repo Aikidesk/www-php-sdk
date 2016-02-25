@@ -15,6 +15,11 @@ class Instances
     protected $id = null;
 
     /**
+     * @var \Aikidesk\WWW\Resources\InstancesOAuth
+     */
+    private $instancesOAuth;
+
+    /**
      * @var \Aikidesk\WWW\Contracts\RequestInterface
      */
     private $request;
@@ -22,11 +27,16 @@ class Instances
     /**
      * Users constructor.
      * @param int|null $instanceId
+     * @param \Aikidesk\WWW\Resources\InstancesOAuth|null $instancesOAuth
      * @param \Aikidesk\WWW\Contracts\RequestInterface $request
      */
-    public function __construct($instanceId = null, RequestInterface $request)
+    public function __construct($instanceId = null, InstancesOAuth $instancesOAuth = null, RequestInterface $request)
     {
         $this->setId($instanceId);
+        $this->instancesOAuth = $instancesOAuth;
+        if ($this->instancesOAuth === null) {
+            $this->instancesOAuth = new InstancesOAuth($this->getId(), null, $request);
+        }
         $this->request = $request;
     }
 
@@ -118,19 +128,6 @@ class Instances
     }
 
     /**
-     * Scopes: instance_archive_own, instance_archive_all
-     *
-     * @return \Aikidesk\WWW\Contracts\ResponseInterface
-     */
-    public function archive()
-    {
-        $instance_id = $this->getId();
-        $input = [];
-
-        return $this->request->delete(sprintf('instance/%1s', $instance_id), $input);
-    }
-
-    /**
      * @return int|null
      */
     public function getId()
@@ -147,5 +144,30 @@ class Instances
         $this->id = $id;
 
         return $this;
+    }
+
+    /**
+     * Scopes: instance_archive_own, instance_archive_all
+     *
+     * @return \Aikidesk\WWW\Contracts\ResponseInterface
+     */
+    public function archive()
+    {
+        $instance_id = $this->getId();
+        $input = [];
+
+        return $this->request->delete(sprintf('instance/%1s', $instance_id), $input);
+    }
+
+    /**
+     * @param null|int $oauth_id
+     * @return \Aikidesk\WWW\Resources\InstancesOAuth
+     */
+    public function oauth($oauth_id = null)
+    {
+        $this->instancesOAuth->setInstanceId($this->getId());
+        $this->instancesOAuth->setOAuthId($oauth_id);
+
+        return $this->instancesOAuth;
     }
 }

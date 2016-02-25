@@ -50,7 +50,7 @@ class Api
         $this->request = $request;
         $this->oauthResources = $oauthResources ?: new \Aikidesk\WWW\Resources\OAuth($this->request);
         $this->usersResources = $usersResources ?: new \Aikidesk\WWW\Resources\Users(null, $this->request);
-        $this->instancesResources = $instancesResources ?: new \Aikidesk\WWW\Resources\Instances(null, $this->request);
+        $this->instancesResources = $instancesResources ?: new \Aikidesk\WWW\Resources\Instances(null, null, $this->request);
 //        $this->sessionResources = $sessionResources ?: new \Aikidesk\WWW\Resources\Sessions(null, $this->request);
 //        $this->roomResources = $roomResources ?: new \Aikidesk\WWW\Resources\Rooms(null, $this->request);
 //        $this->userResources = $userResources ?: new \Aikidesk\WWW\Resources\Users(null, $this->request);
