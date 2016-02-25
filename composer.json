@@ -18,10 +18,14 @@
   },
   "require-dev": {
     "symfony/var-dumper": "~2.8",
-    "guzzlehttp/guzzle": "~6"
+    "guzzlehttp/guzzle": "~6",
+    "resty/resty": "@stable",
+    "php-curl-class/php-curl-class": "~4"
   },
   "suggest": {
-    "guzzlehttp/guzzle": "Guzzle HTTP Client v6 (with/out curl)"
+    "guzzlehttp/guzzle": "Guzzle HTTP Client v6 (with/out curl)",
+    "resty/resty": "Resty v0.6 (without curl)",
+    "php-curl-class/php-curl-class": "PHP Curl Class v4 (with curl)"
   },
   "autoload": {
     "psr-4": {

@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "eb281f54287416e611840d09e1613846",
-    "content-hash": "14ba8a3b17d325ccc7e63c85d314bcd4",
+    "hash": "cf278711e37eb96361ba0b13b43b824b",
+    "content-hash": "bb70139874a593a92f203a06883701c1",
     "packages": [],
     "packages-dev": [
         {
@@ -123,16 +123,16 @@
         },
         {
             "name": "guzzlehttp/psr7",
-            "version": "1.2.2",
+            "version": "1.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/psr7.git",
-                "reference": "f5d04bdd2881ac89abde1fb78cc234bce24327bb"
+                "reference": "2e89629ff057ebb49492ba08e6995d3a6a80021b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/psr7/zipball/f5d04bdd2881ac89abde1fb78cc234bce24327bb",
-                "reference": "f5d04bdd2881ac89abde1fb78cc234bce24327bb",
+                "url": "https://api.github.com/repos/guzzle/psr7/zipball/2e89629ff057ebb49492ba08e6995d3a6a80021b",
+                "reference": "2e89629ff057ebb49492ba08e6995d3a6a80021b",
                 "shasum": ""
             },
             "require": {
@@ -177,7 +177,63 @@
                 "stream",
                 "uri"
             ],
-            "time": "2016-01-23 01:23:02"
+            "time": "2016-02-18 21:54:00"
+        },
+        {
+            "name": "php-curl-class/php-curl-class",
+            "version": "4.10.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-curl-class/php-curl-class.git",
+                "reference": "dce9acb7a27f98b5040cfa9b3aa36da4a7ff3004"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-curl-class/php-curl-class/zipball/dce9acb7a27f98b5040cfa9b3aa36da4a7ff3004",
+                "reference": "dce9acb7a27f98b5040cfa9b3aa36da4a7ff3004",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "php": ">=5.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Curl\\": "src/Curl/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Unlicense"
+            ],
+            "authors": [
+                {
+                    "name": "Zach Borboa"
+                }
+            ],
+            "description": "PHP Curl Class is an object-oriented wrapper of the PHP cURL extension.",
+            "homepage": "https://github.com/php-curl-class/php-curl-class",
+            "keywords": [
+                "api",
+                "class",
+                "client",
+                "curl",
+                "framework",
+                "http",
+                "http client",
+                "json",
+                "php",
+                "requests",
+                "rest",
+                "restful",
+                "web service",
+                "xml"
+            ],
+            "time": "2016-01-31 12:32:31"
         },
         {
             "name": "psr/http-message",
@@ -227,6 +283,53 @@
                 "response"
             ],
             "time": "2015-05-04 20:22:00"
+        },
+        {
+            "name": "resty/resty",
+            "version": "0.6.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/fictivekin/Resty.php.git",
+                "reference": "3ba18ec4b507b3b6fcbc49bba5a503baba051c0a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/fictivekin/Resty.php/zipball/3ba18ec4b507b3b6fcbc49bba5a503baba051c0a",
+                "reference": "3ba18ec4b507b3b6fcbc49bba5a503baba051c0a",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "funkatron/funit": "dev-master"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Resty\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache 2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Ed Finkler",
+                    "email": "ed@fictivekin.com",
+                    "homepage": "http://fictivekin.com"
+                }
+            ],
+            "description": "A simple PHP library for doing RESTful HTTP stuff. Does not require the curl extension",
+            "homepage": "https://github.com/fictivekin/resty.php",
+            "keywords": [
+                "client",
+                "http",
+                "rest",
+                "restful"
+            ],
+            "time": "2014-02-13 16:19:46"
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -353,7 +456,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "resty/resty": 0
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
