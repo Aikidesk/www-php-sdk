@@ -1,7 +1,7 @@
 <?php
-namespace Aikidesk\WWW;
+namespace Aikidesk\SDK\WWW;
 
-use Aikidesk\WWW\Exceptions\ApiException;
+use Aikidesk\SDK\WWW\Exceptions\ApiException;
 use GuzzleHttp\Client;
 use Resty\Resty;
 
@@ -9,12 +9,12 @@ class ApiFactory
 {
 
     /**
-     * @var \Aikidesk\WWW\Contracts\RequestInterface
+     * @var \Aikidesk\SDK\WWW\Contracts\RequestInterface
      */
     public static $httpClient = null;
 
     /**
-     * @var \Aikidesk\WWW\Contracts\RequestInterface
+     * @var \Aikidesk\SDK\WWW\Contracts\RequestInterface
      */
     public static $httpOAuthClient = null;
 
@@ -24,8 +24,8 @@ class ApiFactory
     public static $baseUrl = Api::BASE_URL;
 
     /**
-     * @return \Aikidesk\WWW\Api
-     * @throws \Aikidesk\WWW\Exceptions\ApiException
+     * @return \Aikidesk\SDK\WWW\Api
+     * @throws \Aikidesk\SDK\WWW\Exceptions\ApiException
      */
     public static function instance()
     {
@@ -35,8 +35,8 @@ class ApiFactory
     }
 
     /**
-     * @return \Aikidesk\WWW\HttpClients\GuzzleV6|\Aikidesk\WWW\HttpClients\RestyClient|null
-     * @throws \Aikidesk\WWW\Exceptions\ApiException
+     * @return \Aikidesk\SDK\WWW\HttpClients\GuzzleV6|\Aikidesk\SDK\WWW\HttpClients\RestyClient|null
+     * @throws \Aikidesk\SDK\WWW\Exceptions\ApiException
      */
     public static function createHttpClient()
     {
@@ -45,11 +45,11 @@ class ApiFactory
         }
 
         if (class_exists('GuzzleHttp\Client')) {
-            self::$httpClient = new \Aikidesk\WWW\HttpClients\GuzzleV6(self::$baseUrl.'/1.0/');
+            self::$httpClient = new \Aikidesk\SDK\WWW\HttpClients\GuzzleV6(self::$baseUrl.'/1.0/');
         } elseif (class_exists('Resty\Resty')) {
-            self::$httpClient = new \Aikidesk\WWW\HttpClients\RestyClient(self::$baseUrl.'/1.0/');
+            self::$httpClient = new \Aikidesk\SDK\WWW\HttpClients\RestyClient(self::$baseUrl.'/1.0/');
         } elseif (extension_loaded('curl') and class_exists('Curl\Curl')) {
-            self::$httpClient = new \Aikidesk\WWW\HttpClients\PhpCurlClient(self::$baseUrl.'/1.0/');
+            self::$httpClient = new \Aikidesk\SDK\WWW\HttpClients\PhpCurlClient(self::$baseUrl.'/1.0/');
         } else {
             throw new ApiException('There is no supported HTTP Client!', 999);
         }
@@ -58,8 +58,8 @@ class ApiFactory
     }
 
     /**
-     * @return \Aikidesk\WWW\ApiTokens
-     * @throws \Aikidesk\WWW\Exceptions\ApiException
+     * @return \Aikidesk\SDK\WWW\ApiTokens
+     * @throws \Aikidesk\SDK\WWW\Exceptions\ApiException
      */
     public static function instanceTokens()
     {
@@ -69,8 +69,8 @@ class ApiFactory
     }
 
     /**
-     * @return \Aikidesk\WWW\HttpClients\GuzzleV6|\Aikidesk\WWW\HttpClients\RestyClient|null
-     * @throws \Aikidesk\WWW\Exceptions\ApiException
+     * @return \Aikidesk\SDK\WWW\HttpClients\GuzzleV6|\Aikidesk\SDK\WWW\HttpClients\RestyClient|null
+     * @throws \Aikidesk\SDK\WWW\Exceptions\ApiException
      */
     public static function createOAuthHttpClient()
     {
@@ -80,14 +80,14 @@ class ApiFactory
 
         if (class_exists('GuzzleHttp\Client')) {
             $client = new Client(array('base_uri' => self::$baseUrl.'/'));
-            self::$httpOAuthClient = new \Aikidesk\WWW\HttpClients\GuzzleV6(self::$baseUrl, $client);
+            self::$httpOAuthClient = new \Aikidesk\SDK\WWW\HttpClients\GuzzleV6(self::$baseUrl, $client);
         } elseif (class_exists('Resty\Resty')) {
             $client = new Resty();
             $client->setBaseURL(self::$baseUrl.'/');
-            self::$httpClient = new \Aikidesk\WWW\HttpClients\RestyClient(self::$baseUrl, $client);
+            self::$httpClient = new \Aikidesk\SDK\WWW\HttpClients\RestyClient(self::$baseUrl, $client);
         } elseif (extension_loaded('curl') and class_exists('Curl\Curl')) {
             $client = new \Curl\Curl(self::$baseUrl.'/');
-            self::$httpClient = new \Aikidesk\WWW\HttpClients\PhpCurlClient(self::$baseUrl, $client);
+            self::$httpClient = new \Aikidesk\SDK\WWW\HttpClients\PhpCurlClient(self::$baseUrl, $client);
         } else {
             throw new ApiException('There is no supported HTTP Client!', 999);
         }
@@ -97,7 +97,7 @@ class ApiFactory
 
     /**
      * @param $accessToken
-     * @throws \Aikidesk\WWW\Exceptions\ApiException
+     * @throws \Aikidesk\SDK\WWW\Exceptions\ApiException
      */
     public static function setAccessToken($accessToken)
     {

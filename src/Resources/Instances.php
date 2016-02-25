@@ -1,7 +1,7 @@
 <?php
-namespace Aikidesk\WWW\Resources;
+namespace Aikidesk\SDK\WWW\Resources;
 
-use Aikidesk\WWW\Contracts\RequestInterface;
+use Aikidesk\SDK\WWW\Contracts\RequestInterface;
 
 /**
  * Class Instances
@@ -15,20 +15,20 @@ class Instances
     protected $id = null;
 
     /**
-     * @var \Aikidesk\WWW\Resources\InstancesOAuth
+     * @var \Aikidesk\SDK\WWW\Resources\InstancesOAuth
      */
     private $instancesOAuth;
 
     /**
-     * @var \Aikidesk\WWW\Contracts\RequestInterface
+     * @var \Aikidesk\SDK\WWW\Contracts\RequestInterface
      */
     private $request;
 
     /**
      * Users constructor.
      * @param int|null $instanceId
-     * @param \Aikidesk\WWW\Resources\InstancesOAuth|null $instancesOAuth
-     * @param \Aikidesk\WWW\Contracts\RequestInterface $request
+     * @param \Aikidesk\SDK\WWW\Resources\InstancesOAuth|null $instancesOAuth
+     * @param \Aikidesk\SDK\WWW\Contracts\RequestInterface $request
      */
     public function __construct($instanceId = null, InstancesOAuth $instancesOAuth = null, RequestInterface $request)
     {
@@ -44,7 +44,7 @@ class Instances
      * Scopes: instance_get_own, instance_get_all
      *
      * @param array $filter
-     * @return \Aikidesk\WWW\Contracts\ResponseInterface
+     * @return \Aikidesk\SDK\WWW\Contracts\ResponseInterface
      */
     public function all($filter = [])
     {
@@ -97,7 +97,7 @@ class Instances
      * @param string $timezone
      * @param string $locale
      * @param array $optional
-     * @return \Aikidesk\WWW\Contracts\ResponseInterface
+     * @return \Aikidesk\SDK\WWW\Contracts\ResponseInterface
      */
     public function create($name, $subdomain, $timezone, $locale, $optional = [])
     {
@@ -117,7 +117,7 @@ class Instances
     /**
      * Scopes: instance_get_own, instance_get_all
      *
-     * @return \Aikidesk\WWW\Contracts\ResponseInterface
+     * @return \Aikidesk\SDK\WWW\Contracts\ResponseInterface
      */
     public function get()
     {
@@ -149,7 +149,7 @@ class Instances
     /**
      * Scopes: instance_archive_own, instance_archive_all
      *
-     * @return \Aikidesk\WWW\Contracts\ResponseInterface
+     * @return \Aikidesk\SDK\WWW\Contracts\ResponseInterface
      */
     public function archive()
     {
@@ -161,7 +161,7 @@ class Instances
 
     /**
      * @param null|int $oauth_id
-     * @return \Aikidesk\WWW\Resources\InstancesOAuth
+     * @return \Aikidesk\SDK\WWW\Resources\InstancesOAuth
      */
     public function oauth($oauth_id = null)
     {

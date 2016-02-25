@@ -1,7 +1,7 @@
 <?php
-namespace Aikidesk\WWW;
+namespace Aikidesk\SDK\WWW;
 
-use Aikidesk\WWW\Contracts\ResponseInterface;
+use Aikidesk\SDK\WWW\Contracts\ResponseInterface;
 use ArrayAccess;
 
 /**

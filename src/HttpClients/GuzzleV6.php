@@ -1,9 +1,9 @@
 <?php
-namespace Aikidesk\WWW\HttpClients;
+namespace Aikidesk\SDK\WWW\HttpClients;
 
-use Aikidesk\WWW\Api;
-use Aikidesk\WWW\Contracts\RequestInterface;
-use Aikidesk\WWW\Response;
+use Aikidesk\SDK\WWW\Api;
+use Aikidesk\SDK\WWW\Contracts\RequestInterface;
+use Aikidesk\SDK\WWW\Response;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\TransferException;
 use GuzzleHttp\Psr7\Request;
@@ -43,7 +43,7 @@ class GuzzleV6 implements RequestInterface
     /**
      * @param string $uri
      * @param array $queryParams
-     * @return \Aikidesk\WWW\Contracts\ResponseInterface
+     * @return \Aikidesk\SDK\WWW\Contracts\ResponseInterface
      */
     public function get($uri, $queryParams = array())
     {
@@ -112,7 +112,7 @@ class GuzzleV6 implements RequestInterface
 
     /**
      * @param \Psr\Http\Message\ResponseInterface $response
-     * @return \Aikidesk\WWW\Contracts\ResponseInterface
+     * @return \Aikidesk\Api\WWW\Contracts\ResponseInterface
      */
     public function returnResponseObject($response)
     {
@@ -130,7 +130,7 @@ class GuzzleV6 implements RequestInterface
      * @param string $uri
      * @param array $queryParams
      * @param array $headers
-     * @return \Aikidesk\WWW\Contracts\ResponseInterface
+     * @return \Aikidesk\SDK\WWW\Contracts\ResponseInterface
      */
     public function post($uri, $queryParams = array(), $headers = array())
     {
@@ -146,7 +146,7 @@ class GuzzleV6 implements RequestInterface
     /**
      * @param       $uri
      * @param array $queryParams
-     * @return \Aikidesk\WWW\Contracts\ResponseInterface
+     * @return \Aikidesk\SDK\WWW\Contracts\ResponseInterface
      */
     public function put($uri, $queryParams = array())
     {
@@ -162,7 +162,7 @@ class GuzzleV6 implements RequestInterface
     /**
      * @param       $uri
      * @param array $queryParams
-     * @return \Aikidesk\WWW\Contracts\ResponseInterface
+     * @return \Aikidesk\SDK\WWW\Contracts\ResponseInterface
      */
     public function delete($uri, $queryParams = array())
     {

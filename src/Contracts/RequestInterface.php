@@ -1,5 +1,5 @@
 <?php
-namespace Aikidesk\WWW\Contracts;
+namespace Aikidesk\SDK\WWW\Contracts;
 
 /**
  * Interface RequestInterface
@@ -19,7 +19,7 @@ interface RequestInterface
     /**
      * @param string $uri
      * @param array $queryParams
-     * @return \Aikidesk\WWW\Contracts\ResponseInterface
+     * @return \Aikidesk\SDK\WWW\Contracts\ResponseInterface
      */
     public function get($uri, $queryParams = []);
 
@@ -27,27 +27,27 @@ interface RequestInterface
      * @param string $uri
      * @param array $queryParams
      * @param array $headers
-     * @return \Aikidesk\WWW\Contracts\ResponseInterface
+     * @return \Aikidesk\SDK\WWW\Contracts\ResponseInterface
      */
     public function post($uri, $queryParams = [], $headers = []);
 
     /**
      * @param string $uri
      * @param array $queryParams
-     * @return \Aikidesk\WWW\Contracts\ResponseInterface
+     * @return \Aikidesk\SDK\WWW\Contracts\ResponseInterface
      */
     public function put($uri, $queryParams = []);
 
     /**
      * @param string $uri
      * @param array $queryParams
-     * @return \Aikidesk\WWW\Contracts\ResponseInterface
+     * @return \Aikidesk\SDK\WWW\Contracts\ResponseInterface
      */
     public function delete($uri, $queryParams = []);
 
     /**
      * @param $response
-     * @return \Aikidesk\WWW\Contracts\ResponseInterface
+     * @return \Aikidesk\SDK\WWW\Contracts\ResponseInterface
      */
     public function returnResponseObject($response);
 }

@@ -1,7 +1,7 @@
 <?php
-namespace Aikidesk\WWW;
+namespace Aikidesk\SDK\WWW;
 
-use Aikidesk\WWW\Contracts\RequestInterface;
+use Aikidesk\SDK\WWW\Contracts\RequestInterface;
 
 class Api
 {
@@ -15,28 +15,28 @@ class Api
     const API_VERSION = '1.0';
 
     /**
-     * @var \Aikidesk\WWW\Contracts\RequestInterface|null
+     * @var \Aikidesk\SDK\WWW\Contracts\RequestInterface|null
      */
     protected $request = null;
 
     /**
-     * @var \Aikidesk\WWW\Resources\OAuth
+     * @var \Aikidesk\SDK\WWW\Resources\OAuth
      */
     private $oauthResources;
 
     /**
-     * @var \Aikidesk\WWW\Resources\Users
+     * @var \Aikidesk\SDK\WWW\Resources\Users
      */
     private $usersResources;
 
     /**
-     * @var \Aikidesk\WWW\Resources\Instances
+     * @var \Aikidesk\SDK\WWW\Resources\Instances
      */
     private $instancesResources;
 
     /**
      * Api constructor.
-     * @param \Aikidesk\WWW\Contracts\RequestInterface $request
+     * @param \Aikidesk\SDK\WWW\Contracts\RequestInterface $request
      * @param null $oauthResources
      * @param null $usersResources
      * @param null $instancesResources
@@ -48,12 +48,12 @@ class Api
         $instancesResources = null
     ) {
         $this->request = $request;
-        $this->oauthResources = $oauthResources ?: new \Aikidesk\WWW\Resources\OAuth($this->request);
-        $this->usersResources = $usersResources ?: new \Aikidesk\WWW\Resources\Users(null, $this->request);
-        $this->instancesResources = $instancesResources ?: new \Aikidesk\WWW\Resources\Instances(null, null, $this->request);
-//        $this->sessionResources = $sessionResources ?: new \Aikidesk\WWW\Resources\Sessions(null, $this->request);
-//        $this->roomResources = $roomResources ?: new \Aikidesk\WWW\Resources\Rooms(null, $this->request);
-//        $this->userResources = $userResources ?: new \Aikidesk\WWW\Resources\Users(null, $this->request);
+        $this->oauthResources = $oauthResources ?: new \Aikidesk\SDK\WWW\Resources\OAuth($this->request);
+        $this->usersResources = $usersResources ?: new \Aikidesk\SDK\WWW\Resources\Users(null, $this->request);
+        $this->instancesResources = $instancesResources ?: new \Aikidesk\SDK\WWW\Resources\Instances(null, null, $this->request);
+//        $this->sessionResources = $sessionResources ?: new \Aikidesk\SDK\WWW\Resources\Sessions(null, $this->request);
+//        $this->roomResources = $roomResources ?: new \Aikidesk\SDK\WWW\Resources\Rooms(null, $this->request);
+//        $this->userResources = $userResources ?: new \Aikidesk\SDK\WWW\Resources\Users(null, $this->request);
     }
 
     /**
@@ -61,46 +61,46 @@ class Api
      * @param string $msg
      * @param string $url
      * @param array $meta
-     * @throws \Aikidesk\WWW\Exceptions\ApiException
-     * @throws \Aikidesk\WWW\Exceptions\BadRequestException
-     * @throws \Aikidesk\WWW\Exceptions\ForbiddenException
-     * @throws \Aikidesk\WWW\Exceptions\InternalServerErrorException
-     * @throws \Aikidesk\WWW\Exceptions\NotFoundException
-     * @throws \Aikidesk\WWW\Exceptions\ServerValidationException
-     * @throws \Aikidesk\WWW\Exceptions\ServerUnavailableException
-     * @throws \Aikidesk\WWW\Exceptions\UnauthorizedException
+     * @throws \Aikidesk\SDK\WWW\Exceptions\ApiException
+     * @throws \Aikidesk\SDK\WWW\Exceptions\BadRequestException
+     * @throws \Aikidesk\SDK\WWW\Exceptions\ForbiddenException
+     * @throws \Aikidesk\SDK\WWW\Exceptions\InternalServerErrorException
+     * @throws \Aikidesk\SDK\WWW\Exceptions\NotFoundException
+     * @throws \Aikidesk\SDK\WWW\Exceptions\ServerValidationException
+     * @throws \Aikidesk\SDK\WWW\Exceptions\ServerUnavailableException
+     * @throws \Aikidesk\SDK\WWW\Exceptions\UnauthorizedException
      */
     public static function throwException($code, $msg, $url = '', $meta = [])
     {
         switch ($code) {
             case 400:
-                throw new \Aikidesk\WWW\Exceptions\BadRequestException($msg, $code, $url, $meta);
+                throw new \Aikidesk\SDK\WWW\Exceptions\BadRequestException($msg, $code, $url, $meta);
                 break;
             case 401:
-                throw new \Aikidesk\WWW\Exceptions\UnauthorizedException($msg, $code, $url, $meta);
+                throw new \Aikidesk\SDK\WWW\Exceptions\UnauthorizedException($msg, $code, $url, $meta);
                 break;
             case 403:
-                throw new \Aikidesk\WWW\Exceptions\ForbiddenException($msg, $code, $url, $meta);
+                throw new \Aikidesk\SDK\WWW\Exceptions\ForbiddenException($msg, $code, $url, $meta);
                 break;
             case 404:
-                throw new \Aikidesk\WWW\Exceptions\NotFoundException($msg, $code, $url, $meta);
+                throw new \Aikidesk\SDK\WWW\Exceptions\NotFoundException($msg, $code, $url, $meta);
                 break;
             case 422:
-                throw new \Aikidesk\WWW\Exceptions\ServerValidationException($msg, $code, $url, $meta);
+                throw new \Aikidesk\SDK\WWW\Exceptions\ServerValidationException($msg, $code, $url, $meta);
                 break;
             case 500:
-                throw new \Aikidesk\WWW\Exceptions\InternalServerErrorException($msg, $code, $url, $meta);
+                throw new \Aikidesk\SDK\WWW\Exceptions\InternalServerErrorException($msg, $code, $url, $meta);
                 break;
             case 503:
-                throw new \Aikidesk\WWW\Exceptions\ServerUnavailableException($msg, $code, $url, $meta);
+                throw new \Aikidesk\SDK\WWW\Exceptions\ServerUnavailableException($msg, $code, $url, $meta);
                 break;
             default:
-                throw new \Aikidesk\WWW\Exceptions\ApiException($msg, $code, $url, $meta);
+                throw new \Aikidesk\SDK\WWW\Exceptions\ApiException($msg, $code, $url, $meta);
         }
     }
 
     /**
-     * @return \Aikidesk\WWW\Resources\OAuth
+     * @return \Aikidesk\SDK\WWW\Resources\OAuth
      */
     public function oauth()
     {
@@ -109,7 +109,7 @@ class Api
 
     /**
      * @param int|null $userId
-     * @return \Aikidesk\WWW\Resources\Users
+     * @return \Aikidesk\SDK\WWW\Resources\Users
      */
     public function users($userId = null)
     {
@@ -120,7 +120,7 @@ class Api
 
     /**
      * @param int|null $instanceId
-     * @return \Aikidesk\WWW\Resources\Instances
+     * @return \Aikidesk\SDK\WWW\Resources\Instances
      */
     public function instances($instanceId = null)
     {

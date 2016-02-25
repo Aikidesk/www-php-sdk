@@ -1,5 +1,5 @@
 <?php
-namespace Aikidesk\WWW\Contracts;
+namespace Aikidesk\SDK\WWW\Contracts;
 
 interface ResponseInterface
 {

@@ -1,7 +1,7 @@
 <?php
-namespace Aikidesk\WWW\Resources;
+namespace Aikidesk\SDK\WWW\Resources;
 
-use Aikidesk\WWW\Contracts\RequestInterface;
+use Aikidesk\SDK\WWW\Contracts\RequestInterface;
 
 /**
  * Class InstancesOAuth
@@ -20,7 +20,7 @@ class InstancesOAuth
     protected $oauthId = null;
 
     /**
-     * @var \Aikidesk\WWW\Contracts\RequestInterface
+     * @var \Aikidesk\SDK\WWW\Contracts\RequestInterface
      */
     private $request;
 
@@ -28,7 +28,7 @@ class InstancesOAuth
      * Users constructor.
      * @param int|null $instanceId
      * @param int|null $oauthId
-     * @param \Aikidesk\WWW\Contracts\RequestInterface $request
+     * @param \Aikidesk\SDK\WWW\Contracts\RequestInterface $request
      */
     public function __construct($instanceId = null, $oauthId = null, RequestInterface $request)
     {
@@ -42,7 +42,7 @@ class InstancesOAuth
      * Scopes Instance OAuth: instance_oauth_get_own, instance_oauth_get_all
      *
      * @param array $filter
-     * @return \Aikidesk\WWW\Contracts\ResponseInterface
+     * @return \Aikidesk\SDK\WWW\Contracts\ResponseInterface
      */
     public function all($filter = [])
     {
@@ -84,7 +84,7 @@ class InstancesOAuth
      *
      * @param string $name
      * @param array $optional
-     * @return \Aikidesk\WWW\Contracts\ResponseInterface
+     * @return \Aikidesk\SDK\WWW\Contracts\ResponseInterface
      */
     public function create($name, $optional = [])
     {
@@ -99,7 +99,7 @@ class InstancesOAuth
      * Scopes Instance: instance_get_own, instance_get_all
      * Scopes Instance OAuth: instance_oauth_get_own, instance_oauth_get_all
      *
-     * @return \Aikidesk\WWW\Contracts\ResponseInterface
+     * @return \Aikidesk\SDK\WWW\Contracts\ResponseInterface
      */
     public function get()
     {
@@ -132,7 +132,7 @@ class InstancesOAuth
     /**
      * Scopes: instance_archive_own, instance_archive_all
      *
-     * @return \Aikidesk\WWW\Contracts\ResponseInterface
+     * @return \Aikidesk\Api\WWW\Contracts\ResponseInterface
      */
     public function delete()
     {

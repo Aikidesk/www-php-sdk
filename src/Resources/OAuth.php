@@ -1,19 +1,19 @@
 <?php
-namespace Aikidesk\WWW\Resources;
+namespace Aikidesk\SDK\WWW\Resources;
 
-use Aikidesk\WWW\Contracts\RequestInterface;
+use Aikidesk\SDK\WWW\Contracts\RequestInterface;
 
 class OAuth
 {
 
     /**
-     * @var \Aikidesk\WWW\Contracts\RequestInterface
+     * @var \Aikidesk\SDK\WWW\Contracts\RequestInterface
      */
     private $request;
 
     /**
      * OAuth constructor.
-     * @param \Aikidesk\WWW\Contracts\RequestInterface $request
+     * @param \Aikidesk\SDK\WWW\Contracts\RequestInterface $request
      */
     public function __construct(RequestInterface $request)
     {
@@ -21,7 +21,7 @@ class OAuth
     }
 
     /**
-     * @return \Aikidesk\WWW\Contracts\ResponseInterface
+     * @return \Aikidesk\SDK\WWW\Contracts\ResponseInterface
      */
     public function current()
     {

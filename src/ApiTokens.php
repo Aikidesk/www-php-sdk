@@ -1,7 +1,7 @@
 <?php
-namespace Aikidesk\WWW;
+namespace Aikidesk\SDK\WWW;
 
-use Aikidesk\WWW\Contracts\RequestInterface;
+use Aikidesk\SDK\WWW\Contracts\RequestInterface;
 
 class ApiTokens
 {
@@ -16,13 +16,13 @@ class ApiTokens
     const API_VERSION = 'oauth';
 
     /**
-     * @var \Aikidesk\WWW\Contracts\RequestInterface|null
+     * @var \Aikidesk\SDK\WWW\Contracts\RequestInterface|null
      */
     protected $request = null;
 
     /**
      * ApiTokens constructor.
-     * @param \Aikidesk\WWW\Contracts\RequestInterface $request
+     * @param \Aikidesk\SDK\WWW\Contracts\RequestInterface $request
      */
     public function __construct(RequestInterface $request)
     {
@@ -34,43 +34,43 @@ class ApiTokens
      * @param string $msg
      * @param string $url
      * @param array $meta
-     * @throws \Aikidesk\WWW\Exceptions\ApiException
-     * @throws \Aikidesk\WWW\Exceptions\BadRequestException
-     * @throws \Aikidesk\WWW\Exceptions\ForbiddenException
-     * @throws \Aikidesk\WWW\Exceptions\InternalServerErrorException
-     * @throws \Aikidesk\WWW\Exceptions\NotFoundException
-     * @throws \Aikidesk\WWW\Exceptions\ServerValidationException
-     * @throws \Aikidesk\WWW\Exceptions\ServerUnavailableException
-     * @throws \Aikidesk\WWW\Exceptions\UnauthorizedException
+     * @throws \Aikidesk\SDK\WWW\Exceptions\ApiException
+     * @throws \Aikidesk\SDK\WWW\Exceptions\BadRequestException
+     * @throws \Aikidesk\SDK\WWW\Exceptions\ForbiddenException
+     * @throws \Aikidesk\SDK\WWW\Exceptions\InternalServerErrorException
+     * @throws \Aikidesk\SDK\WWW\Exceptions\NotFoundException
+     * @throws \Aikidesk\SDK\WWW\Exceptions\ServerValidationException
+     * @throws \Aikidesk\SDK\WWW\Exceptions\ServerUnavailableException
+     * @throws \Aikidesk\SDK\WWW\Exceptions\UnauthorizedException
      */
     public static function throwException($code, $msg, $url = '', $meta = [])
     {
         switch ($code) {
             case 400:
-                throw new \Aikidesk\WWW\Exceptions\BadRequestException($msg, $code, $url, $meta);
+                throw new \Aikidesk\SDK\WWW\Exceptions\BadRequestException($msg, $code, $url, $meta);
                 break;
             case 401:
-                throw new \Aikidesk\WWW\Exceptions\UnauthorizedException($msg, $code, $url, $meta);
+                throw new \Aikidesk\SDK\WWW\Exceptions\UnauthorizedException($msg, $code, $url, $meta);
                 break;
             case 403:
-                throw new \Aikidesk\WWW\Exceptions\ForbiddenException($msg, $code, $url, $meta);
+                throw new \Aikidesk\SDK\WWW\Exceptions\ForbiddenException($msg, $code, $url, $meta);
                 break;
             case 404:
-                throw new \Aikidesk\WWW\Exceptions\NotFoundException($msg, $code, $url, $meta);
+                throw new \Aikidesk\SDK\WWW\Exceptions\NotFoundException($msg, $code, $url, $meta);
                 break;
             case 500:
-                throw new \Aikidesk\WWW\Exceptions\InternalServerErrorException($msg, $code, $url, $meta);
+                throw new \Aikidesk\Api\WWW\Exceptions\InternalServerErrorException($msg, $code, $url, $meta);
                 break;
             case 503:
-                throw new \Aikidesk\WWW\Exceptions\ServerUnavailableException($msg, $code, $url, $meta);
+                throw new \Aikidesk\SDK\WWW\Exceptions\ServerUnavailableException($msg, $code, $url, $meta);
                 break;
             default:
-                throw new \Aikidesk\WWW\Exceptions\ApiException($msg, $code, $url, $meta);
+                throw new \Aikidesk\SDK\WWW\Exceptions\ApiException($msg, $code, $url, $meta);
         }
     }
 
     /**
-     * @return \Aikidesk\WWW\Contracts\ResponseInterface
+     * @return \Aikidesk\SDK\WWW\Contracts\ResponseInterface
      */
     public function current()
     {
@@ -81,7 +81,7 @@ class ApiTokens
      * @param string $oauthId
      * @param string $oauthSecret
      * @param array $scopes
-     * @return \Aikidesk\WWW\Contracts\Resp
+     * @return \Aikidesk\SDK\WWW\Contracts\Resp
      */
     public function createClientCredentialsToken($oauthId, $oauthSecret, $scopes = [])
     {

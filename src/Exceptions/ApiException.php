@@ -1,5 +1,5 @@
 <?php
-namespace Aikidesk\WWW\Exceptions;
+namespace Aikidesk\SDK\WWW\Exceptions;
 
 use Exception;
 

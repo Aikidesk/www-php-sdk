@@ -1,7 +1,7 @@
 <?php
-namespace Aikidesk\WWW\Resources;
+namespace Aikidesk\SDK\WWW\Resources;
 
-use Aikidesk\WWW\Contracts\RequestInterface;
+use Aikidesk\SDK\WWW\Contracts\RequestInterface;
 
 /**
  * Class Users
@@ -15,14 +15,14 @@ class Users
     protected $id = null;
 
     /**
-     * @var \Aikidesk\WWW\Contracts\RequestInterface
+     * @var \Aikidesk\SDK\WWW\Contracts\RequestInterface
      */
     private $request;
 
     /**
      * Users constructor.
      * @param int|null $userId
-     * @param \Aikidesk\WWW\Contracts\RequestInterface $request
+     * @param \Aikidesk\SDK\WWW\Contracts\RequestInterface $request
      */
     public function __construct($userId = null, RequestInterface $request)
     {
@@ -34,7 +34,7 @@ class Users
      * Scopes: user_get_own, user_get_all
      *
      * @param array $filter
-     * @return \Aikidesk\WWW\Contracts\ResponseInterface
+     * @return \Aikidesk\SDK\WWW\Contracts\ResponseInterface
      */
     public function all($filter = [])
     {
@@ -62,7 +62,7 @@ class Users
      * @param string $email
      * @param string $password
      * @param array $optional
-     * @return \Aikidesk\WWW\Contracts\ResponseInterface
+     * @return \Aikidesk\SDK\WWW\Contracts\ResponseInterface
      */
     public function create($name, $email, $password, $optional = [])
     {
@@ -85,7 +85,7 @@ class Users
     /**
      * Scopes: user_get_own, user_get_all
      *
-     * @return \Aikidesk\WWW\Contracts\ResponseInterface
+     * @return \Aikidesk\SDK\WWW\Contracts\ResponseInterface
      */
     public function get()
     {
@@ -118,8 +118,8 @@ class Users
      * Scopes: user_search_id
      *
      * @param string $email
-     * @return \Aikidesk\WWW\Contracts\ResponseInterface
-     * @throws \Aikidesk\WWW\Exceptions\ApiException
+     * @return \Aikidesk\SDK\WWW\Contracts\ResponseInterface
+     * @throws \Aikidesk\SDK\WWW\Exceptions\ApiException
      */
     public function searchByEmail($email)
     {
@@ -131,7 +131,7 @@ class Users
      *
      * @param string $oldPassword
      * @param string $newPassword
-     * @return \Aikidesk\WWW\Contracts\ResponseInterface
+     * @return \Aikidesk\SDK\WWW\Contracts\ResponseInterface
      */
     public function changePassword($oldPassword, $newPassword)
     {

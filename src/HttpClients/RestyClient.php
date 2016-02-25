@@ -1,8 +1,8 @@
 <?php
-namespace Aikidesk\WWW\HttpClients;
+namespace Aikidesk\SDK\WWW\HttpClients;
 
-use Aikidesk\WWW\Contracts\RequestInterface;
-use Aikidesk\WWW\Response;
+use Aikidesk\SDK\WWW\Contracts\RequestInterface;
+use Aikidesk\SDK\WWW\Response;
 use Resty\Resty;
 
 /**
@@ -40,7 +40,7 @@ class RestyClient implements RequestInterface
     /**
      * @param string $uri
      * @param array $queryParams
-     * @return \Aikidesk\WWW\Contracts\ResponseInterface
+     * @return \Aikidesk\SDK\WWW\Contracts\ResponseInterface
      */
     public function get($uri, $queryParams = array())
     {
@@ -134,7 +134,7 @@ class RestyClient implements RequestInterface
 
     /**
      * @param array $response
-     * @return \Aikidesk\WWW\Contracts\ResponseInterface
+     * @return \Aikidesk\SDK\WWW\Contracts\ResponseInterface
      */
     public function returnResponseObject($response)
     {
@@ -153,7 +153,7 @@ class RestyClient implements RequestInterface
      * @param string $uri
      * @param array $queryParams
      * @param array $headers
-     * @return \Aikidesk\WWW\Contracts\ResponseInterface
+     * @return \Aikidesk\SDK\WWW\Contracts\ResponseInterface
      */
     public function post($uri, $queryParams = array(), $headers = array())
     {
@@ -165,7 +165,7 @@ class RestyClient implements RequestInterface
     /**
      * @param       $uri
      * @param array $queryParams
-     * @return \Aikidesk\WWW\Contracts\ResponseInterface
+     * @return \Aikidesk\SDK\WWW\Contracts\ResponseInterface
      */
     public function put($uri, $queryParams = array())
     {
@@ -177,7 +177,7 @@ class RestyClient implements RequestInterface
     /**
      * @param       $uri
      * @param array $queryParams
-     * @return \Aikidesk\WWW\Contracts\ResponseInterface
+     * @return \Aikidesk\SDK\WWW\Contracts\ResponseInterface
      */
     public function delete($uri, $queryParams = array())
     {
