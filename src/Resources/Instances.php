@@ -41,6 +41,25 @@ class Instances
     }
 
     /**
+     * @return int|null
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param int|null $id
+     * @return $this
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
+    /**
      * Scopes: instance_get_own, instance_get_all
      *
      * @param array $filter
@@ -117,33 +136,18 @@ class Instances
     /**
      * Scopes: instance_get_own, instance_get_all
      *
+     * @param array $optional
      * @return \Aikidesk\SDK\WWW\Contracts\ResponseInterface
      */
-    public function get()
+    public function get($optional = [])
     {
         $instance_id = $this->getId();
         $input = [];
+        if (isset($optional['with'])) {
+            $input['with'] = $optional['with'];
+        }
 
         return $this->request->get(sprintf('instance/%1s', $instance_id), $input);
-    }
-
-    /**
-     * @return int|null
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param int|null $id
-     * @return $this
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-
-        return $this;
     }
 
     /**

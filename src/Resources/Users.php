@@ -85,12 +85,16 @@ class Users
     /**
      * Scopes: user_get_own, user_get_all
      *
+     * @param array $optional
      * @return \Aikidesk\SDK\WWW\Contracts\ResponseInterface
      */
-    public function get()
+    public function get($optional = [])
     {
         $user_id = $this->getId();
         $input = [];
+        if (isset($optional['with'])) {
+            $input['with'] = $optional['with'];
+        }
 
         return $this->request->get(sprintf('user/%1sd', $user_id), $input);
     }

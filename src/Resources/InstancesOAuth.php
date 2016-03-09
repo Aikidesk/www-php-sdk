@@ -99,13 +99,17 @@ class InstancesOAuth
      * Scopes Instance: instance_get_own, instance_get_all
      * Scopes Instance OAuth: instance_oauth_get_own, instance_oauth_get_all
      *
+     * @param array $optional
      * @return \Aikidesk\SDK\WWW\Contracts\ResponseInterface
      */
-    public function get()
+    public function get($optional = [])
     {
         $instance_id = $this->getInstanceId();
         $oauth_id = $this->getOAuthId();
         $input = [];
+        if (isset($optional['with'])) {
+            $input['with'] = $optional['with'];
+        }
 
         return $this->request->get(sprintf('instance/%1s/oauth/%2s', $instance_id, $oauth_id), $input);
     }
