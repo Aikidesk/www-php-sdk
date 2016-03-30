@@ -57,7 +57,7 @@ class InstancesOAuth
             $input['with'] = $filter['with'];
         }
 
-        return $this->request->get(sprintf('instance/%1s/oauth', $instance_id), $input);
+        return $this->request->get(sprintf('instance/%1d/oauth', $instance_id), $input);
     }
 
     /**
@@ -92,7 +92,7 @@ class InstancesOAuth
         $input = [];
         $input['name'] = $name;
 
-        return $this->request->post(sprintf('instance/%1s/oauth', $instance_id), $input);
+        return $this->request->post(sprintf('instance/%1d/oauth', $instance_id), $input);
     }
 
     /**
@@ -111,7 +111,7 @@ class InstancesOAuth
             $input['with'] = $optional['with'];
         }
 
-        return $this->request->get(sprintf('instance/%1s/oauth/%2s', $instance_id, $oauth_id), $input);
+        return $this->request->get(sprintf('instance/%1d/oauth/%2d', $instance_id, $oauth_id), $input);
     }
 
     /**
@@ -136,7 +136,7 @@ class InstancesOAuth
     /**
      * Scopes: instance_archive_own, instance_archive_all
      *
-     * @return \Aikidesk\Api\WWW\Contracts\ResponseInterface
+     * @return \Aikidesk\SDK\WWW\Contracts\ResponseInterface
      */
     public function delete()
     {
@@ -144,6 +144,6 @@ class InstancesOAuth
         $oauth_id = $this->getOAuthId();
         $input = [];
 
-        return $this->request->delete(sprintf('instance/%1s/oauth/%2s', $instance_id, $oauth_id), $input);
+        return $this->request->delete(sprintf('instance/%1d/oauth/%2d', $instance_id, $oauth_id), $input);
     }
 }

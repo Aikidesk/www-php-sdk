@@ -7,7 +7,6 @@ use Aikidesk\SDK\WWW\Response;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\TransferException;
 use GuzzleHttp\Psr7\Request;
-use Symfony\Component\VarDumper\VarDumper;
 
 /**
  * Class GuzzleV6
@@ -70,7 +69,7 @@ class GuzzleV6 implements RequestInterface
             }
             $response = $this->client->send($request, $options);
         } catch (TransferException $e) {
-            VarDumper::dump((string) $e->getResponse()->getBody());
+//            VarDumper::dump((string)$e->getResponse()->getBody());
             if ($e->getResponse() !== null and $e->getResponse()->getBody() !== null) {
                 $json_exception = json_encode($e->getResponse()->getBody(), true);
                 if ($json_exception === false) {

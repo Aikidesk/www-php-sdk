@@ -3,7 +3,7 @@ namespace Aikidesk\SDK\WWW;
 
 use Aikidesk\SDK\WWW\Contracts\RequestInterface;
 
-class Api
+class Api implements WwwSdkApiInterface
 {
     /**
      * @var string
@@ -50,10 +50,8 @@ class Api
         $this->request = $request;
         $this->oauthResources = $oauthResources ?: new \Aikidesk\SDK\WWW\Resources\OAuth($this->request);
         $this->usersResources = $usersResources ?: new \Aikidesk\SDK\WWW\Resources\Users(null, $this->request);
-        $this->instancesResources = $instancesResources ?: new \Aikidesk\SDK\WWW\Resources\Instances(null, null, $this->request);
-//        $this->sessionResources = $sessionResources ?: new \Aikidesk\SDK\WWW\Resources\Sessions(null, $this->request);
-//        $this->roomResources = $roomResources ?: new \Aikidesk\SDK\WWW\Resources\Rooms(null, $this->request);
-//        $this->userResources = $userResources ?: new \Aikidesk\SDK\WWW\Resources\Users(null, $this->request);
+        $this->instancesResources = $instancesResources ?: new \Aikidesk\SDK\WWW\Resources\Instances(null, null,
+            $this->request);
     }
 
     /**

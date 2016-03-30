@@ -141,26 +141,53 @@ class Instances
      */
     public function get($optional = [])
     {
-        $instance_id = $this->getId();
+        $instanceId = $this->getId();
         $input = [];
         if (isset($optional['with'])) {
             $input['with'] = $optional['with'];
         }
 
-        return $this->request->get(sprintf('instance/%1s', $instance_id), $input);
+        return $this->request->get(sprintf('instance/%1d', $instanceId), $input);
     }
 
     /**
      * Scopes: instance_archive_own, instance_archive_all
-     *
      * @return \Aikidesk\SDK\WWW\Contracts\ResponseInterface
      */
     public function archive()
     {
-        $instance_id = $this->getId();
+        $instanceId = $this->getId();
         $input = [];
 
-        return $this->request->delete(sprintf('instance/%1s', $instance_id), $input);
+        return $this->request->delete(sprintf('instance/%1d', $instanceId), $input);
+    }
+
+    /**
+     * @param string $clientKey
+     * @param string $clientSecret
+     * @return \Aikidesk\SDK\WWW\Contracts\ResponseInterface
+     */
+    public function sendSystemOAuthClient($clientKey, $clientSecret)
+    {
+        $instanceId = $this->getId();
+        $input = [];
+        $input['client_key'] = $clientKey;
+        $input['client_secret'] = $clientSecret;
+
+        return $this->request->put(sprintf('instance/%1d/systemOAuthClient', $instanceId), $input);
+    }
+
+    /**
+     * @param string $userId
+     * @return \Aikidesk\SDK\WWW\Contracts\ResponseInterface
+     */
+    public function systemGrantUser($userId)
+    {
+        $instanceId = $this->getId();
+        $input = [];
+        $input['user_id'] = $userId;
+
+        return $this->request->put(sprintf('instance/%1d/systemGrantUser', $instanceId), $input);
     }
 
     /**

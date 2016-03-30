@@ -21,6 +21,7 @@ class Users
 
     /**
      * Users constructor.
+     *
      * @param int|null $userId
      * @param \Aikidesk\SDK\WWW\Contracts\RequestInterface $request
      */
@@ -34,6 +35,7 @@ class Users
      * Scopes: user_get_own, user_get_all
      *
      * @param array $filter
+     *
      * @return \Aikidesk\SDK\WWW\Contracts\ResponseInterface
      */
     public function all($filter = [])
@@ -62,6 +64,7 @@ class Users
      * @param string $email
      * @param string $password
      * @param array $optional
+     *
      * @return \Aikidesk\SDK\WWW\Contracts\ResponseInterface
      */
     public function create($name, $email, $password, $optional = [])
@@ -86,17 +89,18 @@ class Users
      * Scopes: user_get_own, user_get_all
      *
      * @param array $optional
+     *
      * @return \Aikidesk\SDK\WWW\Contracts\ResponseInterface
      */
     public function get($optional = [])
     {
-        $user_id = $this->getId();
+        $userId = $this->getId();
         $input = [];
         if (isset($optional['with'])) {
             $input['with'] = $optional['with'];
         }
 
-        return $this->request->get(sprintf('user/%1sd', $user_id), $input);
+        return $this->request->get(sprintf('user/%1sd', $userId), $input);
     }
 
     /**
@@ -109,6 +113,7 @@ class Users
 
     /**
      * @param int|null $id
+     *
      * @return $this
      */
     public function setId($id)
@@ -122,6 +127,7 @@ class Users
      * Scopes: user_search_id
      *
      * @param string $email
+     *
      * @return \Aikidesk\SDK\WWW\Contracts\ResponseInterface
      * @throws \Aikidesk\SDK\WWW\Exceptions\ApiException
      */
@@ -135,16 +141,67 @@ class Users
      *
      * @param string $oldPassword
      * @param string $newPassword
+     *
      * @return \Aikidesk\SDK\WWW\Contracts\ResponseInterface
      */
     public function changePassword($oldPassword, $newPassword)
     {
-        $user_id = $this->getId();
+        $userId = $this->getId();
         $input = [];
         $input['oldPassword'] = $oldPassword;
         $input['newPassword'] = $newPassword;
         $input['newPassword_confirmation'] = $newPassword;
 
-        return $this->request->put(sprintf('user/%1sd/password', $user_id), $input);
+        return $this->request->put(sprintf('user/%1d/password', $userId), $input);
+    }
+
+    /**
+     * Scopes: instance_system
+     *
+     * @param string $resetCode
+     * @param string $password
+     *
+     * @return \Aikidesk\SDK\WWW\Contracts\ResponseInterface
+     */
+    public function resetPasswordWithCode($resetCode, $password)
+    {
+        $userId = $this->getId();
+        $input = [];
+        $input['reset_code'] = $resetCode;
+        $input['password'] = $password;
+
+        return $this->request->put(sprintf('user/%1d/resetPassword', $userId), $input);
+    }
+
+    /**
+     * Scopes: instance_system
+     *
+     * @param string $password
+     *
+     * @return \Aikidesk\SDK\WWW\Contracts\ResponseInterface
+     */
+    public function replacePassword($password)
+    {
+        $userId = $this->getId();
+        $input = [];
+        $input['newPassword'] = $password;
+
+        return $this->request->put(sprintf('user/%1d/replacePassword', $userId), $input);
+    }
+
+    /**
+     * Scopes: instance_system
+     *
+     * @param string $resetCode
+     *
+     * @return \Aikidesk\SDK\WWW\Contracts\ResponseInterface
+     */
+    public function setResetCode($resetCode)
+    {
+        $userId = $this->getId();
+        $input = [];
+        $input['reset_code'] = $resetCode;
+
+        return $this->request->put(sprintf('user/%1d/resetCode', $userId), $input);
     }
 }

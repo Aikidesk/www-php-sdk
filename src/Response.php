@@ -36,6 +36,12 @@ class Response implements ResponseInterface, ArrayAccess
     protected $responseCode;
 
     /**
+     * Array with http responce codes which indicate OK
+     * @var array
+     */
+    protected $ok_http_codes = [200, 201, 202, 204];
+
+    /**
      * Response constructor.
      */
     public function __construct()
@@ -104,6 +110,19 @@ class Response implements ResponseInterface, ArrayAccess
     public function setData($data)
     {
         $this->data = $data;
+    }
+
+    /**
+     * If response is among OK status codes
+     * @return bool
+     */
+    public function isOk()
+    {
+        if (in_array($this->getResponseCode(), $this->ok_http_codes)) {
+            return true;
+        }
+
+        return false;
     }
 
     /**
