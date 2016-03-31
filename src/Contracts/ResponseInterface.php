@@ -58,4 +58,14 @@ interface ResponseInterface
      * @return bool
      */
     public function isOk();
+
+    /**
+     * @return string
+     */
+    public function getPlainBody();
+
+    /**
+     * @param string $plainBody
+     */
+    public function setPlainBody($plainBody);
 }

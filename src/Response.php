@@ -26,6 +26,11 @@ class Response implements ResponseInterface, ArrayAccess
     protected $rateReset;
 
     /**
+     * @var string
+     */
+    protected $plainBody;
+
+    /**
      * @var mixed|array
      */
     protected $data;
@@ -139,6 +144,22 @@ class Response implements ResponseInterface, ArrayAccess
     public function setResponseCode($responseCode)
     {
         $this->responseCode = $responseCode;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPlainBody()
+    {
+        return $this->plainBody;
+    }
+
+    /**
+     * @param string $plainBody
+     */
+    public function setPlainBody($plainBody)
+    {
+        $this->plainBody = $plainBody;
     }
 
     /**

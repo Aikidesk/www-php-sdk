@@ -46,7 +46,7 @@ class InstancesOAuth
      */
     public function all($filter = [])
     {
-        $instance_id = $this->getInstanceId();
+        $instanceId = $this->getInstanceId();
         $input = [];
 
         if (isset($filter['page'])) {
@@ -57,7 +57,7 @@ class InstancesOAuth
             $input['with'] = $filter['with'];
         }
 
-        return $this->request->get(sprintf('instance/%1d/oauth', $instance_id), $input);
+        return $this->request->get(sprintf('instance/%1d/oauth', $instanceId), $input);
     }
 
     /**
@@ -88,11 +88,11 @@ class InstancesOAuth
      */
     public function create($name, $optional = [])
     {
-        $instance_id = $this->getInstanceId();
+        $instanceId = $this->getInstanceId();
         $input = [];
         $input['name'] = $name;
 
-        return $this->request->post(sprintf('instance/%1d/oauth', $instance_id), $input);
+        return $this->request->post(sprintf('instance/%1d/oauth', $instanceId), $input);
     }
 
     /**
@@ -104,14 +104,14 @@ class InstancesOAuth
      */
     public function get($optional = [])
     {
-        $instance_id = $this->getInstanceId();
-        $oauth_id = $this->getOAuthId();
+        $instanceId = $this->getInstanceId();
+        $oauthId = $this->getOAuthId();
         $input = [];
         if (isset($optional['with'])) {
             $input['with'] = $optional['with'];
         }
 
-        return $this->request->get(sprintf('instance/%1d/oauth/%2d', $instance_id, $oauth_id), $input);
+        return $this->request->get(sprintf('instance/%1d/oauth/%2d', $instanceId, $oauthId), $input);
     }
 
     /**
@@ -140,10 +140,10 @@ class InstancesOAuth
      */
     public function delete()
     {
-        $instance_id = $this->getInstanceId();
-        $oauth_id = $this->getOAuthId();
+        $instanceId = $this->getInstanceId();
+        $oauthId = $this->getOAuthId();
         $input = [];
 
-        return $this->request->delete(sprintf('instance/%1d/oauth/%2d', $instance_id, $oauth_id), $input);
+        return $this->request->delete(sprintf('instance/%1d/oauth/%2d', $instanceId, $oauthId), $input);
     }
 }

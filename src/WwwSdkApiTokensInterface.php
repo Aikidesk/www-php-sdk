@@ -1,7 +1,6 @@
 <?php
 namespace Aikidesk\SDK\WWW;
 
-
 interface WwwSdkApiTokensInterface
 {
 

@@ -191,13 +191,13 @@ class Instances
     }
 
     /**
-     * @param null|int $oauth_id
+     * @param null|int $oauthId
      * @return \Aikidesk\SDK\WWW\Resources\InstancesOAuth
      */
-    public function oauth($oauth_id = null)
+    public function oauth($oauthId = null)
     {
         $this->instancesOAuth->setInstanceId($this->getId());
-        $this->instancesOAuth->setOAuthId($oauth_id);
+        $this->instancesOAuth->setOAuthId($oauthId);
 
         return $this->instancesOAuth;
     }

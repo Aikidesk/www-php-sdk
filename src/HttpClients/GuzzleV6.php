@@ -119,6 +119,7 @@ class GuzzleV6 implements RequestInterface
         $return->setRateLimit($response->getHeader('X-RateLimit-Limit'));
         $return->setRateRemaining($response->getHeader('X-RateLimit-Remaining'));
         $return->setRateReset($response->getHeader('X-RateLimit-Reset'));
+        $return->setPlainBody($response->getBody()->getContents());
         $return->setData(json_decode($response->getBody(), true));
         $return->setResponseCode($response->getStatusCode());
 
