@@ -25,17 +25,31 @@ class Instances
     private $request;
 
     /**
+     * @var \Aikidesk\SDK\WWW\Resources\InstancesUser
+     */
+    private $instancesUser;
+
+    /**
      * Users constructor.
      * @param int|null $instanceId
      * @param \Aikidesk\SDK\WWW\Resources\InstancesOAuth|null $instancesOAuth
+     * @param \Aikidesk\SDK\WWW\Resources\InstancesUser $instancesUser
      * @param \Aikidesk\SDK\WWW\Contracts\RequestInterface $request
      */
-    public function __construct($instanceId = null, InstancesOAuth $instancesOAuth = null, RequestInterface $request)
-    {
+    public function __construct(
+        $instanceId = null,
+        InstancesOAuth $instancesOAuth = null,
+        InstancesUser $instancesUser = null,
+        RequestInterface $request
+    ) {
         $this->setId($instanceId);
         $this->instancesOAuth = $instancesOAuth;
         if ($this->instancesOAuth === null) {
             $this->instancesOAuth = new InstancesOAuth($this->getId(), null, $request);
+        }
+        $this->instancesUser = $instancesUser;
+        if ($this->instancesUser === null) {
+            $this->instancesUser = new InstancesUser($this->getId(), null, $request);
         }
         $this->request = $request;
     }
@@ -178,14 +192,17 @@ class Instances
     }
 
     /**
-     * @param string $userId
+     * Scopes: instance_system
+     * @param int $userId
+     * @param int $role
      * @return \Aikidesk\SDK\WWW\Contracts\ResponseInterface
      */
-    public function systemGrantUser($userId)
+    public function systemGrantUser($userId, $role)
     {
         $instanceId = $this->getId();
         $input = [];
         $input['user_id'] = $userId;
+        $input['role'] = $role;
 
         return $this->request->put(sprintf('instance/%1d/systemGrantUser', $instanceId), $input);
     }
@@ -200,5 +217,17 @@ class Instances
         $this->instancesOAuth->setOAuthId($oauthId);
 
         return $this->instancesOAuth;
+    }
+
+    /**
+     * @param null|int $userId
+     * @return \Aikidesk\SDK\WWW\Resources\InstancesUser
+     */
+    public function user($userId = null)
+    {
+        $this->instancesUser->setInstanceId($this->getId());
+        $this->instancesUser->setUserId($userId);
+
+        return $this->instancesUser;
     }
 }
