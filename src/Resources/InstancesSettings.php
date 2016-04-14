@@ -38,7 +38,6 @@ class InstancesSettings
     }
 
     /**
-     * Scopes Instance: instance_get_own, instance_get_all
      * Scopes: instance_system
      *
      * @param array $filter
@@ -80,7 +79,6 @@ class InstancesSettings
     }
 
     /**
-     * Scopes Instance: instance_get_own, instance_get_all
      * Scopes: instance_system
      *
      * @param string $key
@@ -99,7 +97,6 @@ class InstancesSettings
     }
 
     /**
-     * Scopes Instance: instance_get_own, instance_get_all
      * Scopes instance_system
      *
      * @param array $optional
@@ -137,7 +134,6 @@ class InstancesSettings
     }
 
     /**
-     * Scopes Instance: instance_get_own, instance_get_all
      * Scopes: instance_system
      *
      * @param mixed $value
@@ -155,7 +151,6 @@ class InstancesSettings
     }
 
     /**
-     * Scopes Instance: instance_get_own, instance_get_all
      * Scopes: instance_system
      *
      * @return \Aikidesk\SDK\WWW\Contracts\ResponseInterface
