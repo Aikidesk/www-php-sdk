@@ -25,21 +25,23 @@ class Instances
     private $request;
 
     /**
-     * @var \Aikidesk\SDK\WWW\Resources\InstancesUser
+     * @var \Aikidesk\SDK\WWW\Resources\InstancesUsers
      */
-    private $instancesUser;
+    private $instancesUsers;
 
     /**
      * Users constructor.
      * @param int|null $instanceId
      * @param \Aikidesk\SDK\WWW\Resources\InstancesOAuth|null $instancesOAuth
-     * @param \Aikidesk\SDK\WWW\Resources\InstancesUser $instancesUser
+     * @param \Aikidesk\SDK\WWW\Resources\InstancesUsers $instancesUser
+     * @param \Aikidesk\SDK\WWW\Resources\InstancesSettings $instanceSetting
      * @param \Aikidesk\SDK\WWW\Contracts\RequestInterface $request
      */
     public function __construct(
         $instanceId = null,
         InstancesOAuth $instancesOAuth = null,
-        InstancesUser $instancesUser = null,
+        InstancesUsers $instancesUser = null,
+        InstancesSettings $instanceSetting = null,
         RequestInterface $request
     ) {
         $this->setId($instanceId);
@@ -47,9 +49,15 @@ class Instances
         if ($this->instancesOAuth === null) {
             $this->instancesOAuth = new InstancesOAuth($this->getId(), null, $request);
         }
-        $this->instancesUser = $instancesUser;
-        if ($this->instancesUser === null) {
-            $this->instancesUser = new InstancesUser($this->getId(), null, $request);
+
+        $this->instancesUsers = $instancesUser;
+        if ($this->instancesUsers === null) {
+            $this->instancesUsers = new InstancesUsers($this->getId(), null, $request);
+        }
+
+        $this->instancesSettings = $instanceSetting;
+        if ($this->instancesSettings === null) {
+            $this->instancesSettings = new InstancesSettings($this->getId(), null, $request);
         }
         $this->request = $request;
     }
@@ -177,21 +185,6 @@ class Instances
     }
 
     /**
-     * @param string $clientKey
-     * @param string $clientSecret
-     * @return \Aikidesk\SDK\WWW\Contracts\ResponseInterface
-     */
-    public function sendSystemOAuthClient($clientKey, $clientSecret)
-    {
-        $instanceId = $this->getId();
-        $input = [];
-        $input['client_key'] = $clientKey;
-        $input['client_secret'] = $clientSecret;
-
-        return $this->request->put(sprintf('instance/%1d/systemOAuthClient', $instanceId), $input);
-    }
-
-    /**
      * Scopes: instance_system
      * @param int $userId
      * @param int $role
@@ -221,13 +214,25 @@ class Instances
 
     /**
      * @param null|int $userId
-     * @return \Aikidesk\SDK\WWW\Resources\InstancesUser
+     * @return \Aikidesk\SDK\WWW\Resources\InstancesUsers
      */
     public function user($userId = null)
     {
-        $this->instancesUser->setInstanceId($this->getId());
-        $this->instancesUser->setUserId($userId);
+        $this->instancesUsers->setInstanceId($this->getId());
+        $this->instancesUsers->setUserId($userId);
 
-        return $this->instancesUser;
+        return $this->instancesUsers;
+    }
+
+    /**
+     * @param null|int $settingId
+     * @return \Aikidesk\SDK\WWW\Resources\InstancesUsers
+     */
+    public function setting($settingId = null)
+    {
+        $this->instancesSettings->setInstanceId($this->getId());
+        $this->instancesSettings->setSettingId($settingId);
+
+        return $this->instancesSettings;
     }
 }

@@ -4,9 +4,9 @@ namespace Aikidesk\SDK\WWW\Resources;
 use Aikidesk\SDK\WWW\Contracts\RequestInterface;
 
 /**
- * Class InstancesUser
+ * Class InstancesUsers
  */
-class InstancesUser
+class InstancesUsers
 {
 
     /**
@@ -151,7 +151,7 @@ class InstancesUser
         $input = [];
         $input['role'] = $roleId;
 
-        return $this->request->post(sprintf('instance/%1d/user/%1d', $instanceId, $userId), $input);
+        return $this->request->put(sprintf('instance/%1d/user/%1d', $instanceId, $userId), $input);
     }
 
     /**
