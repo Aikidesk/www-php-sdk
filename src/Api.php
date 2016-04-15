@@ -66,6 +66,7 @@ class Api implements WwwSdkApiInterface
      * @throws \Aikidesk\SDK\WWW\Exceptions\InternalServerErrorException
      * @throws \Aikidesk\SDK\WWW\Exceptions\NotFoundException
      * @throws \Aikidesk\SDK\WWW\Exceptions\ServerValidationException
+     * @throws \Aikidesk\SDK\WWW\Exceptions\BadGatewayException
      * @throws \Aikidesk\SDK\WWW\Exceptions\ServerUnavailableException
      * @throws \Aikidesk\SDK\WWW\Exceptions\UnauthorizedException
      */
@@ -89,6 +90,9 @@ class Api implements WwwSdkApiInterface
                 break;
             case 500:
                 throw new \Aikidesk\SDK\WWW\Exceptions\InternalServerErrorException($msg, $code, $url, $meta);
+                break;
+            case 502:
+                throw new \Aikidesk\SDK\WWW\Exceptions\BadGatewayException($msg, $code, $url, $meta);
                 break;
             case 503:
                 throw new \Aikidesk\SDK\WWW\Exceptions\ServerUnavailableException($msg, $code, $url, $meta);
