@@ -44,11 +44,13 @@ class ApiTokens implements WwwSdkApiTokensInterface
      * @param string $msg
      * @param string $url
      * @param array $meta
-     * @throws \Aikidesk\SDK\WWW\Exceptions\InternalServerErrorException
      * @throws \Aikidesk\SDK\WWW\Exceptions\ApiException
      * @throws \Aikidesk\SDK\WWW\Exceptions\BadRequestException
      * @throws \Aikidesk\SDK\WWW\Exceptions\ForbiddenException
+     * @throws \Aikidesk\SDK\WWW\Exceptions\InternalServerErrorException
      * @throws \Aikidesk\SDK\WWW\Exceptions\NotFoundException
+     * @throws \Aikidesk\SDK\WWW\Exceptions\ServerValidationException
+     * @throws \Aikidesk\SDK\WWW\Exceptions\BadGatewayException
      * @throws \Aikidesk\SDK\WWW\Exceptions\ServerUnavailableException
      * @throws \Aikidesk\SDK\WWW\Exceptions\UnauthorizedException
      */
@@ -69,6 +71,9 @@ class ApiTokens implements WwwSdkApiTokensInterface
                 break;
             case 500:
                 throw new \Aikidesk\SDK\WWW\Exceptions\InternalServerErrorException($msg, $code, $url, $meta);
+                break;
+            case 502:
+                throw new \Aikidesk\SDK\WWW\Exceptions\BadGatewayException($msg, $code, $url, $meta);
                 break;
             case 503:
                 throw new \Aikidesk\SDK\WWW\Exceptions\ServerUnavailableException($msg, $code, $url, $meta);
