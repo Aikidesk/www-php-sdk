@@ -39,6 +39,19 @@ class ApiException extends Exception
     }
 
     /**
+     * @return array|null
+     */
+    public function getBody()
+    {
+        $meta = $this->getMeta();
+        if (!isset($meta['body'])) {
+            return null;
+        }
+
+        return json_decode($meta['body'], true);
+    }
+
+    /**
      * @return array
      */
     public function getMeta()

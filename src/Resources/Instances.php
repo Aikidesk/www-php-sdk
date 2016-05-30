@@ -156,6 +156,21 @@ class Instances
     }
 
     /**
+     * Scopes: instance_create
+     *
+     * @param string $subdomain
+     * @param array $optional
+     * @return \Aikidesk\SDK\WWW\Contracts\ResponseInterface
+     */
+    public function checkDomainAvailability($subdomain, $optional = [])
+    {
+        $input = [];
+        $input['subdomain'] = $subdomain;
+
+        return $this->request->post('instance/domain_availability', $input);
+    }
+
+    /**
      * Scopes: instance_get_own, instance_get_all
      *
      * @param array $optional
