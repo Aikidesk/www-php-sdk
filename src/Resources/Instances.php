@@ -30,11 +30,17 @@ class Instances
     private $instancesUsers;
 
     /**
+     * @var \Aikidesk\SDK\WWW\Resources\InstancesBillingEvents
+     */
+    private $instancesBillingEvents;
+
+    /**
      * Users constructor.
      * @param int|null $instanceId
      * @param \Aikidesk\SDK\WWW\Resources\InstancesOAuth|null $instancesOAuth
      * @param \Aikidesk\SDK\WWW\Resources\InstancesUsers $instancesUser
      * @param \Aikidesk\SDK\WWW\Resources\InstancesSettings $instanceSetting
+     * @param \Aikidesk\SDK\WWW\Resources\InstancesBillingEvents $instanceBillingEvents
      * @param \Aikidesk\SDK\WWW\Contracts\RequestInterface $request
      */
     public function __construct(
@@ -42,6 +48,7 @@ class Instances
         InstancesOAuth $instancesOAuth = null,
         InstancesUsers $instancesUser = null,
         InstancesSettings $instanceSetting = null,
+        InstancesBillingEvents $instanceBillingEvents = null,
         RequestInterface $request
     ) {
         $this->setId($instanceId);
@@ -58,6 +65,11 @@ class Instances
         $this->instancesSettings = $instanceSetting;
         if ($this->instancesSettings === null) {
             $this->instancesSettings = new InstancesSettings($this->getId(), null, $request);
+        }
+
+        $this->instancesBillingEvents = $instanceBillingEvents;
+        if ($this->instancesBillingEvents === null) {
+            $this->instancesBillingEvents = new InstancesBillingEvents($this->getId(), $request);
         }
         $this->request = $request;
     }
@@ -196,6 +208,30 @@ class Instances
         $instanceId = $this->getId();
         $input = [];
 
+        return $this->request->put(sprintf('instance/%1d/archive', $instanceId), $input);
+    }
+
+    /**
+     * Scopes: instance_recover_own, instance_recover_all
+     * @return \Aikidesk\SDK\WWW\Contracts\ResponseInterface
+     */
+    public function recover()
+    {
+        $instanceId = $this->getId();
+        $input = [];
+
+        return $this->request->put(sprintf('instance/%1d/recover', $instanceId), $input);
+    }
+
+    /**
+     * Scopes: instance_delete_own, instance_delete_all
+     * @return \Aikidesk\SDK\WWW\Contracts\ResponseInterface
+     */
+    public function delete()
+    {
+        $instanceId = $this->getId();
+        $input = [];
+
         return $this->request->delete(sprintf('instance/%1d', $instanceId), $input);
     }
 
@@ -249,5 +285,15 @@ class Instances
         $this->instancesSettings->setSettingId($settingId);
 
         return $this->instancesSettings;
+    }
+
+    /**
+     * @return \Aikidesk\SDK\WWW\Resources\InstancesBillingEvents
+     */
+    public function billingEvent()
+    {
+        $this->instancesBillingEvents->setInstanceId($this->getId());
+
+        return $this->instancesBillingEvents;
     }
 }
