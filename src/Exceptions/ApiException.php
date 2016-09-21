@@ -27,7 +27,13 @@ class ApiException extends Exception
     {
         $this->url = $url;
         $this->meta = $meta;
-        parent::__construct($msg, (int)$code);
+
+        $prevException = null;
+        if (isset($meta['prevException']) and $meta['prevException'] instanceof \Exception) {
+            $prevException = $meta['prevException'];
+        }
+
+        parent::__construct($msg, (int)$code, $prevException);
     }
 
     /**

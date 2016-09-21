@@ -5,8 +5,10 @@ use Aikidesk\SDK\WWW\Api;
 use Aikidesk\SDK\WWW\Contracts\RequestInterface;
 use Aikidesk\SDK\WWW\Response;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Exception\TransferException;
 use GuzzleHttp\Psr7\Request;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * Class GuzzleV6
@@ -68,25 +70,35 @@ class GuzzleV6 implements RequestInterface
                 $request = $request->withHeader('Authorization', 'Bearer '.$this->getAccessToken());
             }
             $response = $this->client->send($request, $options);
-        } catch (TransferException $e) {
-            $httpCode = $e->getResponse()->getStatusCode();
+        } catch (RequestException $e) {
+            $rawResponse = $e->getResponse();
+
+            $httpCode = 500;
             $errorMsg = '';
-            $json_exception = json_encode($e->getResponse()->getBody(), true);
-            if ($json_exception === false) {
-                $httpCode = $e->getCode();
-                $errorMsg = $e->getMessage();
-            } else {
-                if (isset($json_exception['error_message'])) {
-                    $errorMsg = $json_exception['error_message'];
+            $meta = [];
+            if ($rawResponse instanceof ResponseInterface) {
+                $httpCode = $e->getResponse()->getStatusCode();
+                $json_exception = json_encode($e->getResponse()->getBody(), true);
+                if ($json_exception === false) {
+                    $httpCode = $e->getCode();
+                    $errorMsg = $e->getMessage();
                 } else {
-                    if (isset($json_exception['error'])) {
-                        $errorMsg = $json_exception['error'];
+                    if (isset($json_exception['error_message'])) {
+                        $errorMsg = $json_exception['error_message'];
+                    } else {
+                        if (isset($json_exception['error'])) {
+                            $errorMsg = $json_exception['error'];
+                        }
                     }
                 }
+                $meta = ['body' => (string)$e->getResponse()->getBody()];
             }
 
-            Api::throwException($httpCode, $errorMsg, $request->getUri(),
-                ['body' => (string)$e->getResponse()->getBody()]);
+            $meta['prevException'] = $e;
+            Api::throwException($httpCode, $errorMsg, $request->getUri(), $meta);
+        } catch (TransferException $e) {
+            $meta['prevException'] = $e;
+            Api::throwException($httpCode, $errorMsg, $request->getUri(), $meta);
         }
 
         return $response;
