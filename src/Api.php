@@ -51,7 +51,7 @@ class Api implements WwwSdkApiInterface
         $this->oauthResources = $oauthResources ?: new \Aikidesk\SDK\WWW\Resources\OAuth($this->request);
         $this->usersResources = $usersResources ?: new \Aikidesk\SDK\WWW\Resources\Users(null, $this->request);
         $this->instancesResources = $instancesResources ?: new \Aikidesk\SDK\WWW\Resources\Instances(null, null, null,
-            null, null, $this->request);
+            null, null, null, $this->request);
     }
 
     /**

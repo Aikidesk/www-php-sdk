@@ -35,12 +35,18 @@ class Instances
     private $instancesBillingEvents;
 
     /**
+     * @var \Aikidesk\SDK\WWW\Resources\InstancesStatsInternal
+     */
+    private $instanceStatInternal;
+
+    /**
      * Users constructor.
      * @param int|null $instanceId
      * @param \Aikidesk\SDK\WWW\Resources\InstancesOAuth|null $instancesOAuth
      * @param \Aikidesk\SDK\WWW\Resources\InstancesUsers $instancesUser
      * @param \Aikidesk\SDK\WWW\Resources\InstancesSettings $instanceSetting
      * @param \Aikidesk\SDK\WWW\Resources\InstancesBillingEvents $instanceBillingEvents
+     * @param \Aikidesk\SDK\WWW\Resources\InstancesStatsInternal $instanceStatInternal
      * @param \Aikidesk\SDK\WWW\Contracts\RequestInterface $request
      */
     public function __construct(
@@ -49,6 +55,7 @@ class Instances
         InstancesUsers $instancesUser = null,
         InstancesSettings $instanceSetting = null,
         InstancesBillingEvents $instanceBillingEvents = null,
+        InstancesStatsInternal $instanceStatInternal = null,
         RequestInterface $request
     ) {
         $this->setId($instanceId);
@@ -71,6 +78,12 @@ class Instances
         if ($this->instancesBillingEvents === null) {
             $this->instancesBillingEvents = new InstancesBillingEvents($this->getId(), $request);
         }
+
+        $this->instanceStatInternal = $instanceStatInternal;
+        if ($this->instanceStatInternal === null) {
+            $this->instanceStatInternal = new InstancesStatsInternal($this->getId(), $request);
+        }
+
         $this->request = $request;
     }
 
@@ -295,5 +308,15 @@ class Instances
         $this->instancesBillingEvents->setInstanceId($this->getId());
 
         return $this->instancesBillingEvents;
+    }
+
+    /**
+     * @return \Aikidesk\SDK\WWW\Resources\InstancesStatsInternal
+     */
+    public function statInternal()
+    {
+        $this->instanceStatInternal->setInstanceId($this->getId());
+
+        return $this->instanceStatInternal;
     }
 }
