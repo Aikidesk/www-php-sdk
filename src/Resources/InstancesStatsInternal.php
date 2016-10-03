@@ -103,11 +103,10 @@ class InstancesStatsInternal
     /**
      * Scopes: instance_system
      *
-     * @param string $period
      * @param array $optional
      * @return \Aikidesk\SDK\WWW\Contracts\ResponseInterface
      */
-    public function sendTicketMessageCount($period, $optional = [])
+    public function sendMonthlyTicketMessageCount($optional = [])
     {
         $instanceId = $this->getInstanceId();
         $input = [];
@@ -115,17 +114,16 @@ class InstancesStatsInternal
             $input = array_merge($input, $optional);
         }
 
-        return $this->request->post(sprintf('instance/%1d/stats-internal/%1s/ticket-message-count', $instanceId, $period), $input);
+        return $this->request->post(sprintf('instance/%1d/stats-internal/monthly/ticket-message-count', $instanceId), $input);
     }
 
     /**
      * Scopes: instance_system
      *
-     * @param string $period
      * @param array $optional
      * @return \Aikidesk\SDK\WWW\Contracts\ResponseInterface
      */
-    public function sendTicketReceivedCount($period, $optional = [])
+    public function sendMonthlyTicketReceivedCount($optional = [])
     {
         $instanceId = $this->getInstanceId();
         $input = [];
@@ -133,17 +131,16 @@ class InstancesStatsInternal
             $input = array_merge($input, $optional);
         }
 
-        return $this->request->post(sprintf('instance/%1d/stats-internal/%1s/ticket-received-count', $instanceId, $period), $input);
+        return $this->request->post(sprintf('instance/%1d/stats-internal/monthly/ticket-received-count', $instanceId), $input);
     }
 
     /**
      * Scopes: instance_system
      *
-     * @param string $period
      * @param array $optional
      * @return \Aikidesk\SDK\WWW\Contracts\ResponseInterface
      */
-    public function sendTicketRespondedCount($period, $optional = [])
+    public function sendMonthlyTicketRespondedCount($optional = [])
     {
         $instanceId = $this->getInstanceId();
         $input = [];
@@ -151,6 +148,6 @@ class InstancesStatsInternal
             $input = array_merge($input, $optional);
         }
 
-        return $this->request->post(sprintf('instance/%1d/stats-internal/%1s/ticket-responded-count', $instanceId, $period), $input);
+        return $this->request->post(sprintf('instance/%1d/stats-internal/monthly/ticket-responded-count', $instanceId), $input);
     }
 }
