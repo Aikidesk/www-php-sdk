@@ -39,24 +39,14 @@ class Instances
      */
     private $instanceStatInternal;
 
-    /**
-     * Users constructor.
-     * @param int|null $instanceId
-     * @param \Aikidesk\SDK\WWW\Resources\InstancesOAuth|null $instancesOAuth
-     * @param \Aikidesk\SDK\WWW\Resources\InstancesUsers $instancesUser
-     * @param \Aikidesk\SDK\WWW\Resources\InstancesSettings $instanceSetting
-     * @param \Aikidesk\SDK\WWW\Resources\InstancesBillingEvents $instanceBillingEvents
-     * @param \Aikidesk\SDK\WWW\Resources\InstancesStatsInternal $instanceStatInternal
-     * @param \Aikidesk\SDK\WWW\Contracts\RequestInterface $request
-     */
     public function __construct(
+        RequestInterface $request,
         $instanceId = null,
         InstancesOAuth $instancesOAuth = null,
         InstancesUsers $instancesUser = null,
         InstancesSettings $instanceSetting = null,
         InstancesBillingEvents $instanceBillingEvents = null,
-        InstancesStatsInternal $instanceStatInternal = null,
-        RequestInterface $request
+        InstancesStatsInternal $instanceStatInternal = null
     ) {
         $this->setId($instanceId);
         $this->instancesOAuth = $instancesOAuth;

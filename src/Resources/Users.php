@@ -25,7 +25,7 @@ class Users
      * @param int|null $userId
      * @param \Aikidesk\SDK\WWW\Contracts\RequestInterface $request
      */
-    public function __construct($userId = null, RequestInterface $request)
+    public function __construct(RequestInterface $request, $userId = null)
     {
         $this->setId($userId);
         $this->request = $request;

@@ -24,13 +24,7 @@ class InstancesSettings
      */
     private $request;
 
-    /**
-     * Users constructor.
-     * @param int|null $instanceId
-     * @param int|null $settingId
-     * @param \Aikidesk\SDK\WWW\Contracts\RequestInterface $request
-     */
-    public function __construct($instanceId = null, $settingId = null, RequestInterface $request)
+    public function __construct(RequestInterface $request, $instanceId = null, $settingId = null)
     {
         $this->setInstanceId($instanceId);
         $this->setSettingId($settingId);

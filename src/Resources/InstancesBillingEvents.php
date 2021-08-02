@@ -19,12 +19,7 @@ class InstancesBillingEvents
      */
     private $request;
 
-    /**
-     * Users constructor.
-     * @param int|null $instanceId
-     * @param \Aikidesk\SDK\WWW\Contracts\RequestInterface $request
-     */
-    public function __construct($instanceId = null, RequestInterface $request)
+    public function __construct(RequestInterface $request, $instanceId = null)
     {
         $this->setInstanceId($instanceId);
         $this->request = $request;

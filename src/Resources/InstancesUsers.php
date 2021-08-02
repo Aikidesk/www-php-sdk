@@ -30,7 +30,7 @@ class InstancesUsers
      * @param int|null $userId
      * @param \Aikidesk\SDK\WWW\Contracts\RequestInterface $request
      */
-    public function __construct($instanceId = null, $userId = null, RequestInterface $request)
+    public function __construct(RequestInterface $request, $instanceId = null, $userId = null)
     {
         $this->setInstanceId($instanceId);
         $this->setUserId($userId);

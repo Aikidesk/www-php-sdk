@@ -34,13 +34,6 @@ class Api implements WwwSdkApiInterface
      */
     private $instancesResources;
 
-    /**
-     * Api constructor.
-     * @param \Aikidesk\SDK\WWW\Contracts\RequestInterface $request
-     * @param null $oauthResources
-     * @param null $usersResources
-     * @param null $instancesResources
-     */
     public function __construct(
         RequestInterface $request,
         $oauthResources = null,
@@ -49,9 +42,9 @@ class Api implements WwwSdkApiInterface
     ) {
         $this->request = $request;
         $this->oauthResources = $oauthResources ?: new \Aikidesk\SDK\WWW\Resources\OAuth($this->request);
-        $this->usersResources = $usersResources ?: new \Aikidesk\SDK\WWW\Resources\Users(null, $this->request);
-        $this->instancesResources = $instancesResources ?: new \Aikidesk\SDK\WWW\Resources\Instances(null, null, null,
-            null, null, null, $this->request);
+        $this->usersResources = $usersResources ?: new \Aikidesk\SDK\WWW\Resources\Users($this->request, null);
+        $this->instancesResources = $instancesResources ?: new \Aikidesk\SDK\WWW\Resources\Instances($this->request, null, null, null,
+            null, null, null);
     }
 
     /**
