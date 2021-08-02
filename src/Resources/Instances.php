@@ -51,27 +51,27 @@ class Instances
         $this->setId($instanceId);
         $this->instancesOAuth = $instancesOAuth;
         if ($this->instancesOAuth === null) {
-            $this->instancesOAuth = new InstancesOAuth($this->getId(), null, $request);
+            $this->instancesOAuth = new InstancesOAuth($request, $this->getId(), null);
         }
 
         $this->instancesUsers = $instancesUser;
         if ($this->instancesUsers === null) {
-            $this->instancesUsers = new InstancesUsers($this->getId(), null, $request);
+            $this->instancesUsers = new InstancesUsers($request, $this->getId(), null);
         }
 
         $this->instancesSettings = $instanceSetting;
         if ($this->instancesSettings === null) {
-            $this->instancesSettings = new InstancesSettings($this->getId(), null, $request);
+            $this->instancesSettings = new InstancesSettings($request, $this->getId(), null);
         }
 
         $this->instancesBillingEvents = $instanceBillingEvents;
         if ($this->instancesBillingEvents === null) {
-            $this->instancesBillingEvents = new InstancesBillingEvents($this->getId(), $request);
+            $this->instancesBillingEvents = new InstancesBillingEvents($request, $this->getId());
         }
 
         $this->instanceStatInternal = $instanceStatInternal;
         if ($this->instanceStatInternal === null) {
-            $this->instanceStatInternal = new InstancesStatsInternal($this->getId(), $request);
+            $this->instanceStatInternal = new InstancesStatsInternal($request, $this->getId());
         }
 
         $this->request = $request;
