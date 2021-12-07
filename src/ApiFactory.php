@@ -79,7 +79,7 @@ class ApiFactory
         }
 
         if (class_exists('GuzzleHttp\Client')) {
-            $client = new Client(array('base_uri' => self::$baseUrl.'/'));
+            $client = new Client(array('base_uri' => self::$baseUrl.'/', 'timeout' => 5, 'connect_timeout' => 1));
             self::$httpOAuthClient = new \Aikidesk\SDK\WWW\HttpClients\GuzzleV6(self::$baseUrl, $client);
         } elseif (class_exists('Resty\Resty')) {
             $client = new Resty();

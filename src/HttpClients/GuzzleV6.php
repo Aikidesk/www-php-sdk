@@ -27,7 +27,7 @@ class GuzzleV6 implements RequestInterface
     protected $access_token = '';
 
     /**
-     * @param string $baseUrl
+     * @param string                  $baseUrl
      * @param \GuzzleHttp\Client|null $client
      */
     public function __construct($baseUrl, $client = null)
@@ -37,16 +37,17 @@ class GuzzleV6 implements RequestInterface
 
             return;
         }
-        $client = new Client(array('base_uri' => $baseUrl, 'timeout' => 5));
+        $client = new Client(['base_uri' => $baseUrl, 'timeout' => 5, 'connect_timeout' => 1]);
         $this->client = $client;
     }
 
     /**
      * @param string $uri
-     * @param array $queryParams
+     * @param array  $queryParams
+     *
      * @return \Aikidesk\SDK\WWW\Contracts\ResponseInterface
      */
-    public function get($uri, $queryParams = array())
+    public function get($uri, $queryParams = [])
     {
         $options = [];
         $options['json'] = $queryParams;
@@ -59,7 +60,7 @@ class GuzzleV6 implements RequestInterface
 
     /**
      * @param \GuzzleHttp\Psr7\Request $request
-     * @param array $options
+     * @param array                    $options
      *
      * @return \Psr\Http\Message\ResponseInterface
      */
@@ -67,7 +68,7 @@ class GuzzleV6 implements RequestInterface
     {
         try {
             if ($this->getAccessToken() !== null and !empty($this->getAccessToken())) {
-                $request = $request->withHeader('Authorization', 'Bearer '.$this->getAccessToken());
+                $request = $request->withHeader('Authorization', 'Bearer ' . $this->getAccessToken());
             }
             $response = $this->client->send($request, $options);
         } catch (RequestException $e) {
@@ -91,7 +92,7 @@ class GuzzleV6 implements RequestInterface
                         }
                     }
                 }
-                $meta = ['body' => (string)$e->getResponse()->getBody()];
+                $meta = ['body' => (string) $e->getResponse()->getBody()];
             }
 
             $meta['prevException'] = $e;
@@ -122,6 +123,7 @@ class GuzzleV6 implements RequestInterface
 
     /**
      * @param \Psr\Http\Message\ResponseInterface $response
+     *
      * @return \Aikidesk\Api\WWW\Contracts\ResponseInterface
      */
     public function returnResponseObject($response)
@@ -139,11 +141,12 @@ class GuzzleV6 implements RequestInterface
 
     /**
      * @param string $uri
-     * @param array $queryParams
-     * @param array $headers
+     * @param array  $queryParams
+     * @param array  $headers
+     *
      * @return \Aikidesk\SDK\WWW\Contracts\ResponseInterface
      */
-    public function post($uri, $queryParams = array(), $headers = array())
+    public function post($uri, $queryParams = [], $headers = [])
     {
         $options = [];
         $options['json'] = $queryParams;
@@ -157,9 +160,10 @@ class GuzzleV6 implements RequestInterface
     /**
      * @param       $uri
      * @param array $queryParams
+     *
      * @return \Aikidesk\SDK\WWW\Contracts\ResponseInterface
      */
-    public function put($uri, $queryParams = array())
+    public function put($uri, $queryParams = [])
     {
         $options = [];
         $options['json'] = $queryParams;
@@ -173,9 +177,10 @@ class GuzzleV6 implements RequestInterface
     /**
      * @param       $uri
      * @param array $queryParams
+     *
      * @return \Aikidesk\SDK\WWW\Contracts\ResponseInterface
      */
-    public function delete($uri, $queryParams = array())
+    public function delete($uri, $queryParams = [])
     {
         $options = [];
 
