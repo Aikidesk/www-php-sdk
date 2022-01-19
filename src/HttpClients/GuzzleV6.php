@@ -99,7 +99,7 @@ class GuzzleV6 implements RequestInterface
             Api::throwException($httpCode, $errorMsg, $request->getUri(), $meta);
         } catch (TransferException $e) {
             $meta['prevException'] = $e;
-            Api::throwException($httpCode, $errorMsg, $request->getUri(), $meta);
+            Api::throwException($e->getCode(), $e->getMessage(), $request->getUri(), $meta);
         }
 
         return $response;
