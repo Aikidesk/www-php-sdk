@@ -17,10 +17,10 @@
     "php": ">=7.4"
   },
   "require-dev": {
-    "symfony/var-dumper": "~3",
-    "guzzlehttp/guzzle": "~6",
+    "symfony/var-dumper": "~3|~4|~5|~6|~7",
+    "guzzlehttp/guzzle": "~6|~7",
     "resty/resty": "@stable",
-    "php-curl-class/php-curl-class": "~4"
+    "php-curl-class/php-curl-class": "~9"
   },
   "suggest": {
     "guzzlehttp/guzzle": "Guzzle HTTP Client v6 (with/out curl)",
